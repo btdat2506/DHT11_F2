@@ -168,22 +168,28 @@ static void update_timer_cb(app_timer_t *timer, void *data)
   Humidity = DHT11_Data.Humidity;
 
   UART_log_info("Nhom DDCH\r\n");
-  UART_log_info("Temp: %d\r\n", Temperature);
-  UART_log_info("Humd: %d\r\n", Humidity);
+  UART_log_info("Temp: %d C\r\n", Temperature);
+  UART_log_info("Humd: %d %%\r\n", Humidity);
 
   UART_log_info("Sample DHT Interval time: %d\r\n", SAMPLE_DHT);
   UART_log_info("ADV BLE Interval time: %d\r\n", ADV_BLE);
 
 
-  snprintf(buffer_disp, sizeof(buffer_disp), "Nhiet do: %d", Temperature );
-  memlcd_display_temperature(buffer_disp);
-  snprintf(buffer_disp, sizeof(buffer_disp), "Do am: %d", Humidity);
-  memlcd_display_humidity(buffer_disp);
+  snprintf(buffer_disp, sizeof(buffer_disp), "Nhiet do: %d C", Temperature );
+  memlcd_display(2, buffer_disp);
+  snprintf(buffer_disp, sizeof(buffer_disp), "Do am: %d %%", Humidity);
+  memlcd_display(3, buffer_disp);
+  snprintf(buffer_disp, sizeof(buffer_disp), "Chu Ki Sensor: %d s", SAMPLE_DHT);
+  memlcd_display(4, buffer_disp);
+
 
   if(Humidity >= 75 && flag == 0)
   {
       GPIO_PinOutSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
   }
+  else
+    GPIO_PinOutClear(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
+
   update_adv_data(&sData, advertising_set_handle, (uint8_t) Temperature, (uint8_t) Humidity);
 }
 
@@ -203,6 +209,27 @@ void updateAppTimer()
                        NULL,
                        true);
 
+  app_assert_status(sc);
+}
+
+void updateADVBLE()
+{
+  sl_status_t sc;
+
+  sc = sl_bt_advertiser_stop(advertising_set_handle);
+  app_assert_status(sc);
+
+  sc = sl_bt_advertiser_set_timing(
+    advertising_set_handle,
+    ADV_BLE*1600, // min. adv. interval (milliseconds * 1.6)
+    ADV_BLE*1600, // max. adv. interval (milliseconds * 1.6)
+    0,   // adv. duration
+    0);  // max. num. adv. events
+  app_assert_status(sc);
+
+  // Restart advertising after client has disconnected.
+  sc = sl_bt_legacy_advertiser_start(advertising_set_handle,
+                                     sl_bt_advertiser_connectable_scannable);
   app_assert_status(sc);
 }
 
@@ -282,8 +309,8 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       // Set advertising interval to 1s.
       sc = sl_bt_advertiser_set_timing(
         advertising_set_handle,
-        1600, // min. adv. interval (milliseconds * 1.6)
-        1600, // max. adv. interval (milliseconds * 1.6)
+        ADV_BLE*1600, // min. adv. interval (milliseconds * 1.6)
+        ADV_BLE*1600, // max. adv. interval (milliseconds * 1.6)
         0,   // adv. duration
         0);  // max. num. adv. events
       app_assert_status(sc);

@@ -15,7 +15,7 @@ void memlcd_app_init(void);
 
 void display(int);
 
-void memlcd_app_process_action(uint8_t *framebuffer);
+void memlcd_display(uint8_t line, const char *buffer);
 
 
 #endif /* APP_LCD_H_ */

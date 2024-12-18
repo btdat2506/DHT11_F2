@@ -70,23 +70,12 @@ void memlcd_app_init(void)
 /***************************************************************************//**
  * Ticking function.
  ******************************************************************************/
-void memlcd_display_temperature(const char *buffer_temper)
+void memlcd_display(uint8_t line, const char *buffer)
 {
-
-
-    GLIB_drawStringOnLine(&glibContext, buffer_temper, 1, GLIB_ALIGN_LEFT, 5, 5, true);
-
+    GLIB_drawStringOnLine(&glibContext, buffer, line, GLIB_ALIGN_LEFT, 5, 5, true);
     DMD_updateDisplay();
 }
 
-void memlcd_display_humidity(const char *buffer_humi)
-{
-
-
-    GLIB_drawStringOnLine(&glibContext, buffer_humi, 2, GLIB_ALIGN_LEFT, 5, 5, true);
-
-    DMD_updateDisplay();
-}
 
 
 

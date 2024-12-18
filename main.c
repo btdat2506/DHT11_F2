@@ -174,7 +174,7 @@ int main(void)
     // Application process.
     app_process_action();
 
-    if (USART0->RXDATA == '5')
+    if (USART0->RXDATA == 'i')
     {
       UART_log_info("Input choice: ");
       while (bufferUART != '1' && bufferUART != '2')
@@ -185,7 +185,7 @@ int main(void)
       {
         case STATE_SAMPLE_DHT:
           leng = 0;
-          UART_log_info("Sample DHT Interval time (01 - 99) seconds: ");
+          UART_log_info("Sample DHT Interval time (01 - 99) seconds: \r\n");
           bufferUART_in[1] = USART_Rx(USART0);
           bufferUART_in[0] = USART_Rx(USART0);
           SAMPLE_DHT = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
@@ -193,10 +193,11 @@ int main(void)
           break;
         case STATE_ADV_BLE:
           leng = 0;
-          UART_log_info("ADV BLE Interval time (01 - 99) seconds: ");
+          UART_log_info("ADV BLE Interval time (01 - 99) seconds: \r\n");
           bufferUART_in[1] = USART_Rx(USART0);
           bufferUART_in[0] = USART_Rx(USART0);
-          ADV_BLE = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
+          ADV_BLE = ((bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0'));
+          updateADVBLE();
           break;
         default:
           break;

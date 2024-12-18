@@ -6,7 +6,7 @@
 #define NAME_MAX_LENGTH 16
 
 
-void fill_adv_packet(CustomAdv_t *pData, uint8_t flags, uint16_t companyID, uint16_t led0, uint16_t led1, char *name)
+void fill_adv_packet(CustomAdv_t *pData, uint8_t flags, uint16_t companyID, uint8_t Temperature, uint8_t Humidity, char *name)
 {
   int n;
 
@@ -19,10 +19,10 @@ void fill_adv_packet(CustomAdv_t *pData, uint8_t flags, uint16_t companyID, uint
   pData->company_LO = companyID & 0xFF;
   pData->company_HI = (companyID >> 8) & 0xFF;
 
-  pData->led1_high = (led1 >> 8) & 0xFF;
-  pData->led1_low = led1 & 0xFF;
-  pData->led0_high = (led0 >> 8) & 0xFF;
-  pData->led0_low = led0 & 0xFF;
+  pData->Temp = (Temperature / 10) << 4 | Temperature % 10;
+  pData->Temp_LSD = 0;
+  pData->Humi_MSD = 0;
+  pData->Humi = (Humidity / 10) << 4 |  Humidity % 10;
 
   n = strlen(name);
   if (n > NAME_MAX_LENGTH - 1) {
@@ -57,14 +57,14 @@ void start_adv(CustomAdv_t *pData, uint8_t advertising_set_handle)
                   (int)sc);
 }
 
-void update_adv_data(CustomAdv_t *pData, uint8_t advertising_set_handle, uint16_t led0, uint16_t led1)
+void update_adv_data(CustomAdv_t *pData, uint8_t advertising_set_handle, uint8_t Temperature, uint8_t Humidity)
 {
   sl_status_t sc;
 
-  pData->led1_high = (led1 >> 8) & 0xFF;
-  pData->led1_low = led1 & 0xFF;
-  pData->led0_high = (led0 >> 8) & 0xFF;
-  pData->led0_low = led0 & 0xFF;
+  pData->Temp = (Temperature / 10) << 4 | Temperature % 10;
+  pData->Temp_LSD = 0;
+  pData->Humi_MSD = 0;
+  pData->Humi = (Humidity / 10) << 4 |  Humidity % 10;
 
   sc = sl_bt_legacy_advertiser_set_data(advertising_set_handle, 0, pData->data_size, (const uint8_t *)pData);
   app_assert(sc == SL_STATUS_OK,
