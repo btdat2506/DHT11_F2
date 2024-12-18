@@ -26,7 +26,6 @@
 #include "sl_system_process_action.h"
 #endif // SL_CATALOG_KERNEL_PRESENT
 
-//#include "app_log.h"
 
 #include "em_device.h"
 #include "em_chip.h"
@@ -48,7 +47,8 @@ typedef enum {
     STATE_ADV_BLE
 } uart_state_t;
 
-uart_state_t CHECK_STATE;
+extern uart_state_t CHECK_STATE;
+uint32_t bufferUART;
 
 void initGPIO(void)
 {
@@ -72,6 +72,14 @@ void initGPIO(void)
 
 void initUSART0(void)
 {
+
+/* USART is a HFPERCLK peripheral. Enable HFPERCLK domain and USART0.
+ * We also need to enable the clock for GPIO to configure pins. */
+  CMU_ClockEnable(cmuClock_HFPER, true);
+  CMU_ClockEnable(cmuClock_USART0, true);
+  CMU_ClockEnable(cmuClock_GPIO, true);
+
+
   // Default asynchronous initializer (115.2 Kbps, 8N1, no flow control)
   USART_InitAsync_TypeDef init = USART_INITASYNC_DEFAULT;
 
@@ -96,16 +104,56 @@ void initUSART0(void)
   USART_IntEnable(USART0, USART_IEN_RXDATAV);
 }
 
+extern uint16_t ADV_BLE, SAMPLE_DHT;
+uint8_t bufferUART_in[10], leng = 0;
+
 void USART0_RX_IRQHandler(void)
 {
   // Get the character just received
-  if (USART0->RXDATA > '0' && USART0->RXDATA < '3')
-    CHECK_STATE = USART0->RXDATA - '0';
+  bufferUART = USART0->RXDATA;
+
+
+  if (bufferUART == '5')
+  {
+    USART_IntDisable(USART0, USART_IEN_RXDATAV);
+
+    UART_log_info("Input choice: ");
+    while (bufferUART != '1' && bufferUART != '2')
+      bufferUART = USART_Rx(USART0);
+    CHECK_STATE = bufferUART - '0';
+
+    switch (CHECK_STATE)
+    {
+      case STATE_SAMPLE_DHT:
+        leng = 0;
+        UART_log_info("Sample DHT Interval time (01 - 99) seconds: ");
+        bufferUART_in[1] = USART_Rx(USART0);
+        bufferUART_in[0] = USART_Rx(USART0);
+        SAMPLE_DHT = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
+        break;
+      case STATE_ADV_BLE:
+        leng = 0;
+        UART_log_info("ADV BLE Interval time (01 - 99) seconds: ");
+        bufferUART_in[1] = USART_Rx(USART0);
+        bufferUART_in[0] = USART_Rx(USART0);
+        ADV_BLE = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
+        break;
+      default:
+        break;
+    }
+    bufferUART = '0';
+    USART_IntEnable(USART0, USART_IEN_RXDATAV);
+    CHECK_STATE = 0;
+  }
 }
 
 
 int main(void)
 {
+
+
+
+
   // Initialize Silicon Labs device, system, service(s) and protocol stack(s).
   // Note that if the kernel is present, processing task(s) will be created by
   // this call.
@@ -132,7 +180,6 @@ int main(void)
 
     // Application process.
     app_process_action();
-
 
 #if defined(SL_CATALOG_POWER_MANAGER_PRESENT)
     // Let the CPU go to sleep if the system allows it.

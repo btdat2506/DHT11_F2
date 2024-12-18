@@ -95,14 +95,13 @@ void initLED_BUTTON(){
 void GPIO_EVEN_IRQHandler(void)
 {
   GPIO_IntClear(0x5555);
-  GPIO_PinOutToggle(BSP_GPIO_LED0_PORT, BSP_GPIO_LED0_PIN);
+
 }
 
 void GPIO_ODD_IRQHandler(void)
 {
   GPIO_IntClear(0xAAAA);
-  GPIO_PinOutToggle(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
-  flag=1;
+
 }
 
 CustomAdv_t sData; // Our custom advertising data stored here
@@ -112,10 +111,24 @@ static app_timer_t update_timer;
 
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
+
+// ============== USER DATA ================ //
 DHT_DataTypedef DHT11_Data;
 uint32_t Temperature, Humidity;
 uint32_t Student_ID = 0x21207130; // Student ID
 char buffer_disp[20];
+
+uint16_t ADV_BLE = 1, SAMPLE_DHT = 1;
+
+extern uint32_t bufferUART;
+
+typedef enum {
+    STATE_WORKING,
+    STATE_SAMPLE_DHT,
+    STATE_ADV_BLE
+} uart_state_t;
+
+uart_state_t CHECK_STATE;
 
 void UART_log_info(const char *format, ...) {
   va_list args;
@@ -147,15 +160,52 @@ static void update_timer_cb(app_timer_t *timer, void *data)
   (void)data;
   (void)timer;
 
+//  uint8_t bufferUART_in[10], leng = 0;
+//
+//  if (bufferUART == '5')
+//  {
+//    USART_IntDisable(USART0, USART_IEN_RXDATAV);
+//
+//    UART_log_info("Input choice: ");
+//    while (bufferUART != '1' && bufferUART != '2')
+//      bufferUART = USART_Rx(USART0);
+//    CHECK_STATE = bufferUART - '0';
+//
+//    switch (CHECK_STATE)
+//    {
+//      case STATE_SAMPLE_DHT:
+//        leng = 0;
+//        UART_log_info("Sample DHT Interval time (01 - 99) seconds: ");
+//        bufferUART_in[1] = USART_Rx(USART0);
+//        bufferUART_in[0] = USART_Rx(USART0);
+//        SAMPLE_DHT = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
+//        break;
+//      case STATE_ADV_BLE:
+//        leng = 0;
+//        UART_log_info("ADV BLE Interval time (01 - 99) seconds: ");
+//        bufferUART_in[1] = USART_Rx(USART0);
+//        bufferUART_in[0] = USART_Rx(USART0);
+//        ADV_BLE = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
+//        break;
+//      default:
+//        break;
+//    }
+//    bufferUART = '0';
+//    USART_IntEnable(USART0, USART_IEN_RXDATAV);
+//    CHECK_STATE = 0;
+//  }
+
   DHT_GetData(&DHT11_Data);
   Temperature = DHT11_Data.Temperature;
   Humidity = DHT11_Data.Humidity;
-
+  //UART_log_info("%c\r\n", bufferUART);
   UART_log_info("Nhom DDCH\r\n");
   UART_log_info("Temp: %d\r\n", Temperature);
   UART_log_info("Humd: %d\r\n", Humidity);
 
-  //sl_sleeptimer_delay_millisecond(1000); //1s
+  UART_log_info("Sample DHT Interval time: %d\r\n", SAMPLE_DHT);
+  UART_log_info("ADV BLE Interval time: %d\r\n", ADV_BLE);
+
 
   snprintf(buffer_disp, sizeof(buffer_disp), "Nhiet do: %d", Temperature );
   memlcd_display_temperature(buffer_disp);
