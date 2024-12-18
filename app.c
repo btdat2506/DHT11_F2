@@ -119,6 +119,7 @@ uint32_t Student_ID = 0x21207130; // Student ID
 char buffer_disp[20];
 
 uint16_t ADV_BLE = 1, SAMPLE_DHT = 1;
+//uint8_t bufferUART_in[10], leng = 0;
 
 extern uint32_t bufferUART;
 
@@ -160,45 +161,12 @@ static void update_timer_cb(app_timer_t *timer, void *data)
   (void)data;
   (void)timer;
 
-//  uint8_t bufferUART_in[10], leng = 0;
-//
-//  if (bufferUART == '5')
-//  {
-//    USART_IntDisable(USART0, USART_IEN_RXDATAV);
-//
-//    UART_log_info("Input choice: ");
-//    while (bufferUART != '1' && bufferUART != '2')
-//      bufferUART = USART_Rx(USART0);
-//    CHECK_STATE = bufferUART - '0';
-//
-//    switch (CHECK_STATE)
-//    {
-//      case STATE_SAMPLE_DHT:
-//        leng = 0;
-//        UART_log_info("Sample DHT Interval time (01 - 99) seconds: ");
-//        bufferUART_in[1] = USART_Rx(USART0);
-//        bufferUART_in[0] = USART_Rx(USART0);
-//        SAMPLE_DHT = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
-//        break;
-//      case STATE_ADV_BLE:
-//        leng = 0;
-//        UART_log_info("ADV BLE Interval time (01 - 99) seconds: ");
-//        bufferUART_in[1] = USART_Rx(USART0);
-//        bufferUART_in[0] = USART_Rx(USART0);
-//        ADV_BLE = (bufferUART_in[1] - '0') * 10 + (bufferUART_in[0] - '0');
-//        break;
-//      default:
-//        break;
-//    }
-//    bufferUART = '0';
-//    USART_IntEnable(USART0, USART_IEN_RXDATAV);
-//    CHECK_STATE = 0;
-//  }
+
 
   DHT_GetData(&DHT11_Data);
   Temperature = DHT11_Data.Temperature;
   Humidity = DHT11_Data.Humidity;
-  //UART_log_info("%c\r\n", bufferUART);
+
   UART_log_info("Nhom DDCH\r\n");
   UART_log_info("Temp: %d\r\n", Temperature);
   UART_log_info("Humd: %d\r\n", Humidity);
@@ -217,18 +185,35 @@ static void update_timer_cb(app_timer_t *timer, void *data)
       GPIO_PinOutSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
   }
   update_adv_data(&sData, advertising_set_handle, (uint8_t) Temperature, (uint8_t) Humidity);
-
 }
 
+
+void updateAppTimer()
+{
+  sl_status_t sc;
+  //initLED_BUTTON();
+
+  sc = app_timer_stop(&update_timer);
+
+  app_assert_status(sc);
+
+  sc = app_timer_start(&update_timer,
+                       SAMPLE_DHT*1000,              //ms
+                       update_timer_cb,
+                       NULL,
+                       true);
+
+  app_assert_status(sc);
+}
 
 
 SL_WEAK void app_init(void)
 {
   sl_status_t sc;
-  initLED_BUTTON();
+  //initLED_BUTTON();
 
   sc = app_timer_start(&update_timer,
-                       2*1000,              //ms
+                       SAMPLE_DHT*1000,              //ms
                        update_timer_cb,
                        NULL,
                        true);
