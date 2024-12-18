@@ -92,23 +92,10 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\sleeptimer\inc\sl_sleeptimer.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\mpu\inc\sl_mpu.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_timer\bm\app_timer_internal.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\power_manager\inc\sl_power_manager.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_power_manager_config.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_slist.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_timer\bm\app_timer_internal.h \
  ../autogen/sl_bluetooth.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_config.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_connection_config.h \
@@ -119,12 +106,11 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\protocol\bluetooth\inc\sl_bgapi.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\protocol\bluetooth\inc\sl_bt_api_compatibility.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\driver\debug\inc\sl_debug_swo.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_stdlib_config.h \
- ../autogen/sl_iostream_init_usart_instances.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\security\sl_component\sl_mbedtls_support\inc\sl_mbedtls.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_default.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_generic.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_hal.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_default.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto_platform.h \
@@ -211,6 +197,7 @@ autogen/sl_event_handler.o: ../autogen/sl_event_handler.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto_compat.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\security\sl_component\sl_protocol_crypto\src\sli_protocol_crypto.h \
  ../autogen/sl_iostream_init_instances.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\hardware\driver\configuration_over_swo\inc\sl_cos.h
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 ../autogen/sl_event_handler.h:
@@ -305,23 +292,10 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\hardware\board\inc\sl_board_contr
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\sleeptimer\inc\sl_sleeptimer.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\mpu\inc\sl_mpu.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_timer\bm\app_timer_internal.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\power_manager\inc\sl_power_manager.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_power_manager_config.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_slist.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_timer\bm\app_timer_internal.h:
 ../autogen/sl_bluetooth.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_config.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_connection_config.h:
@@ -332,12 +306,11 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\protocol\bluetooth\inc\sl_bt_api.
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\protocol\bluetooth\inc\sl_bgapi.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\protocol\bluetooth\inc\sl_bt_api_compatibility.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\driver\debug\inc\sl_debug_swo.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_stdlib_config.h:
-../autogen/sl_iostream_init_usart_instances.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\security\sl_component\sl_mbedtls_support\inc\sl_mbedtls.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_default.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_generic.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_hal.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\nvm3\inc\nvm3_default.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto_platform.h:
@@ -424,4 +397,5 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\util\third_party\mbedtls\include\psa\crypto_compat.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\security\sl_component\sl_protocol_crypto\src\sli_protocol_crypto.h:
 ../autogen/sl_iostream_init_instances.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\hardware\driver\configuration_over_swo\inc\sl_cos.h:

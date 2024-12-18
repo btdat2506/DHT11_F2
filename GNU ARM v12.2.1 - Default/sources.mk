@@ -19,7 +19,6 @@ SUBDIRS := \
 . \
 autogen \
 simplicity_sdk_2024.6.2/app/bluetooth/common/in_place_ota_dfu \
-simplicity_sdk_2024.6.2/app/common/util/app_log \
 simplicity_sdk_2024.6.2/app/common/util/app_timer/bm \
 simplicity_sdk_2024.6.2/hardware/board/src \
 simplicity_sdk_2024.6.2/hardware/driver/configuration_over_swo/src \

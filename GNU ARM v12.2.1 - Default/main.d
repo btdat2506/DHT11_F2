@@ -18,12 +18,6 @@ main.o: ../main.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_core.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\system\inc\sl_system_process_action.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\em_device.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21a020f1024im32.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\cmsis\core\include\core_cm33.h \
@@ -70,13 +64,18 @@ main.o: ../main.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_prs_signals.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_dma_descriptor.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_ldmaxbar_defines.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_chip.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_system.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_system_generic.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_bus.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_assert.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_emu.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_cmu.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_cmu_compat.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_gpio.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\sli_em_cmu.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_gpio.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_usart.h
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\toolchain\inc\sl_gcc_preinclude.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\system\inc\sl_system_init.h:
@@ -96,12 +95,6 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_enum.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_core.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\system\inc\sl_system_process_action.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\em_device.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21a020f1024im32.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\cmsis\core\include\core_cm33.h:
@@ -148,10 +141,15 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_prs_signals.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_dma_descriptor.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\device\siliconlabs\efr32mg21\include\efr32mg21_ldmaxbar_defines.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_chip.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_system.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_system_generic.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_bus.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_assert.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_emu.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_cmu.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_cmu_compat.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_gpio.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\sli_em_cmu.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_gpio.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_usart.h:

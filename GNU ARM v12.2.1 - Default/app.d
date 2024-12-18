@@ -57,26 +57,13 @@ app.o: ../app.c \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_assert.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_assert\app_assert.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_assert_config.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_enum.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h \
+ C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_bluetooth.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\power_manager\inc\sl_power_manager.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_power_manager_config.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_slist.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\sleeptimer\inc\sl_sleeptimer.h \
  d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h \
- d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h \
- C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_bluetooth.h \
+ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_enum.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_config.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_connection_config.h \
  C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_advertiser_config.h \
@@ -161,26 +148,13 @@ d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_common.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_assert.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_assert\app_assert.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_assert_config.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\app\common\util\app_log\app_log.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_enum.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_handles.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_iostream_init_usart_instances.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_component_catalog.h:
+C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_bluetooth.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\power_manager\inc\sl_power_manager.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_power_manager_config.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_slist.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\sleeptimer\inc\sl_sleeptimer.h:
 d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_code_classification.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream_uart.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\service\iostream\inc\sl_iostream.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\dmadrv.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\common\inc\ecode.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emdrv\dmadrv\inc\s2_signals\dmadrv_signals.h:
-d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\emlib\inc\em_ldma.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/dmadrv_config.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/app_log_config.h:
-C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\autogen/sl_bluetooth.h:
+d:\fetel_worksoft\siliconlabs\simplicity_sdk_5\platform\common\inc\sl_enum.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_config.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_connection_config.h:
 C:\Users\btdat\SimplicityStudio\v5_workspace\DHT11_F2\config/sl_bluetooth_advertiser_config.h:

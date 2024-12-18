@@ -34,7 +34,7 @@
 #include "sl_bluetooth.h"
 #include "gatt_db.h"
 #include "app.h"
-#include "app_log.h"
+//#include "app_log.h"
 #include "custom_adv.h"
 #include "app_timer.h"
 
@@ -46,6 +46,7 @@
 
 #include "sl_sleeptimer.h"
 #include <DHT.h>
+#include <stdarg.h>
 
 
 #define BSP_TXPORT gpioPortA
@@ -116,6 +117,28 @@ uint32_t Temperature, Humidity;
 uint32_t Student_ID = 0x21207130; // Student ID
 char buffer_disp[20];
 
+void UART_log_info(const char *format, ...) {
+  va_list args;
+  va_start(args, format);
+
+  char buffer[256]; // Create a buffer to store the formatted string
+  int len = vsnprintf(buffer, sizeof(buffer), format, args);
+  va_end(args);
+
+  if (len > 0 && len < sizeof(buffer)) {
+    // Send the formatted string to the USART
+    for (int i = 0; i < len; i++) {
+       USART_Tx(USART0, buffer[i]); // Use the USART_Tx function
+    }
+  } else {
+    // Handle the case where the format string is too long or invalid
+     const char *errorMsg = "Error: UART_log format string too long or invalid!\r\n";
+    for (int i = 0; errorMsg[i] != '\0'; i++) {
+       USART_Tx(USART0, errorMsg[i]); //Use USART_Tx here to send error message
+    }
+  }
+}
+
 /****************************************************************************
  * Application Init.
  *****************************************************************************/
@@ -128,9 +151,9 @@ static void update_timer_cb(app_timer_t *timer, void *data)
   Temperature = DHT11_Data.Temperature;
   Humidity = DHT11_Data.Humidity;
 
-  app_log_info("Nhom DDCH\r\n");
-  app_log_info("Temp: %d\r\n", Temperature);
-  app_log_info("Humd: %d\r\n", Humidity);
+  UART_log_info("Nhom DDCH\r\n");
+  UART_log_info("Temp: %d\r\n", Temperature);
+  UART_log_info("Humd: %d\r\n", Humidity);
 
   //sl_sleeptimer_delay_millisecond(1000); //1s
 
@@ -238,11 +261,11 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
 
       // Add data to Adv packet
       fill_adv_packet(&sData, FLAG, COMPANY_ID, led0_state, led1_state, "DANGDATCHIHOANG");
-      app_log("fill_adv_packet completed\r\n");
+      UART_log_info("fill_adv_packet completed\r\n");
 
       // Start advertise
       start_adv(&sData, advertising_set_handle);
-      app_log("Started advertising\r\n");
+      UART_log_info("Started advertising\r\n");
 
       break;
 

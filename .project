@@ -636,21 +636,6 @@
 			<locationURI>STUDIO_SDK_LOC/app/common/util/app_assert/sl_app_assert.h</locationURI>
 		</link>
 		<link>
-			<name>simplicity_sdk_2024.6.2/app/common/util/app_log/app_log.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/app/common/util/app_log/app_log.c</locationURI>
-		</link>
-		<link>
-			<name>simplicity_sdk_2024.6.2/app/common/util/app_log/app_log.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/app/common/util/app_log/app_log.h</locationURI>
-		</link>
-		<link>
-			<name>simplicity_sdk_2024.6.2/app/common/util/app_log/sl_app_log.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/app/common/util/app_log/sl_app_log.h</locationURI>
-		</link>
-		<link>
 			<name>simplicity_sdk_2024.6.2/app/common/util/app_timer/app_timer.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/app/common/util/app_timer/app_timer.h</locationURI>
@@ -906,11 +891,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream.h</locationURI>
 		</link>
 		<link>
-			<name>simplicity_sdk_2024.6.2/platform/service/iostream/inc/sl_iostream_stdlib_config.h</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_stdlib_config.h</locationURI>
-		</link>
-		<link>
 			<name>simplicity_sdk_2024.6.2/platform/service/iostream/inc/sl_iostream_uart.h</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/inc/sl_iostream_uart.h</locationURI>
@@ -929,16 +909,6 @@
 			<name>simplicity_sdk_2024.6.2/platform/service/iostream/src/sl_iostream.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream.c</locationURI>
-		</link>
-		<link>
-			<name>simplicity_sdk_2024.6.2/platform/service/iostream/src/sl_iostream_retarget_stdio.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_retarget_stdio.c</locationURI>
-		</link>
-		<link>
-			<name>simplicity_sdk_2024.6.2/platform/service/iostream/src/sl_iostream_stdlib_config.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/service/iostream/src/sl_iostream_stdlib_config.c</locationURI>
 		</link>
 		<link>
 			<name>simplicity_sdk_2024.6.2/platform/service/iostream/src/sl_iostream_uart.c</name>
