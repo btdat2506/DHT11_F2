@@ -64,7 +64,9 @@
 #define BSP_GPIO_PB0_PIN 0
 #define BSP_GPIO_PB1_PORT gpioPortB
 #define BSP_GPIO_PB1_PIN 1
+
 uint32_t flag=0;
+
 void initLED_BUTTON(){
   // Enable GPIO clock
   CMU_ClockEnable(cmuClock_GPIO, true);
@@ -88,9 +90,7 @@ void initLED_BUTTON(){
   GPIO_ExtIntConfig(BSP_GPIO_PB1_PORT, BSP_GPIO_PB1_PIN, BSP_GPIO_PB1_PIN, 0, 1, true);
 }
 
-////////////////////////////////////////////////////////////////////////
-/// Hàm toggle LED
-////////////////////////////////////////////////////////////////////////
+
 void GPIO_EVEN_IRQHandler(void)
 {
   GPIO_IntClear(0x5555);
@@ -103,8 +103,6 @@ void GPIO_ODD_IRQHandler(void)
   GPIO_PinOutToggle(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
   flag=1;
 }
-/////////////////////////////////////////////////////////////////////////
-
 
 CustomAdv_t sData; // Our custom advertising data stored here
 
@@ -114,28 +112,38 @@ static app_timer_t update_timer;
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
 DHT_DataTypedef DHT11_Data;
-uint32_t temperature, humidity;
+uint32_t Temperature, Humidity;
 uint32_t Student_ID = 0x21207130; // Student ID
+char buffer_disp[20];
 
-/**************************************************************************//**
+/****************************************************************************
  * Application Init.
  *****************************************************************************/
-
-///////////////////////get value /////////////////////
-void set_temper_humi(uint32_t Temperature, uint32_t Humidity)
-{
-    temperature = Temperature;
-    humidity = Humidity;
-}
-////////////////////////////////////////////////////////
 static void update_timer_cb(app_timer_t *timer, void *data)
 {
   (void)data;
   (void)timer;
-  uint8_t led0_state = temperature;
-  uint8_t led1_state = humidity;
-  if(humidity>=75&& flag==0){GPIO_PinOutSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);}
-  update_adv_data(&sData, advertising_set_handle,led0_state,led1_state);
+
+  DHT_GetData(&DHT11_Data);
+  Temperature = DHT11_Data.Temperature;
+  Humidity = DHT11_Data.Humidity;
+
+  app_log_info("Nhom DDCH\r\n");
+  app_log_info("Temp: %d\r\n", Temperature);
+  app_log_info("Humd: %d\r\n", Humidity);
+
+  //sl_sleeptimer_delay_millisecond(1000); //1s
+
+  snprintf(buffer_disp, sizeof(buffer_disp), "Nhiet do: %d", Temperature );
+  memlcd_display_temperature(buffer_disp);
+  snprintf(buffer_disp, sizeof(buffer_disp), "Do am: %d", Humidity);
+  memlcd_display_humidity(buffer_disp);
+
+  if(Humidity >= 75 && flag == 0)
+  {
+      GPIO_PinOutSet(BSP_GPIO_LED1_PORT, BSP_GPIO_LED1_PIN);
+  }
+  update_adv_data(&sData, advertising_set_handle, (uint8_t) Temperature, (uint8_t) Humidity);
 
 }
 
@@ -151,6 +159,7 @@ SL_WEAK void app_init(void)
                        update_timer_cb,
                        NULL,
                        true);
+
   app_assert_status(sc);
 }
 
@@ -227,11 +236,8 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
 
 
 
-
-
-
       // Add data to Adv packet
-      fill_adv_packet(&sData, FLAG, COMPANY_ID, led0_state,led1_state, "DANGDATCHIHOANG");
+      fill_adv_packet(&sData, FLAG, COMPANY_ID, led0_state, led1_state, "DANGDATCHIHOANG");
       app_log("fill_adv_packet completed\r\n");
 
       // Start advertise

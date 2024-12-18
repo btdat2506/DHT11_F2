@@ -47,6 +47,8 @@ component:
 - {id: gatt_configuration}
 - {id: gatt_service_device_information}
 - {id: in_place_ota_dfu}
+- instance: [vcom]
+  id: iostream_usart
 - {id: iostream_usart_core}
 - {id: mpu}
 - {id: rail_util_pti}

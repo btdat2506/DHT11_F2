@@ -26,12 +26,6 @@
 #include "sl_system_process_action.h"
 #endif // SL_CATALOG_KERNEL_PRESENT
 
-#include <sl_udelay.h>
-#include <app_lcd.h>
-#include "em_cmu.h"
-#include "em_gpio.h"
-#include "sl_sleeptimer.h"
-#include <DHT.h>
 #include "app_log.h"
 
 int main(void)
@@ -45,11 +39,8 @@ int main(void)
   // task(s) if the kernel is present.
   app_init();
   memlcd_app_init();
-  app_log_info("Test\n");
-  DHT_DataTypedef DHT11_Data;
-  uint32_t Temperature, Humidity;
 
-  CMU_ClockEnable(cmuClock_GPIO, true);
+  app_log_info("Test\n");
 
 
 #if defined(SL_CATALOG_KERNEL_PRESENT)
@@ -64,22 +55,7 @@ int main(void)
     // Application process.
     app_process_action();
 
-    char buffer_temper[16];
-    char buffer_humi[16];
 
-    DHT_GetData(&DHT11_Data);
-    Temperature = DHT11_Data.Temperature;
-    Humidity = DHT11_Data.Humidity;
-    set_temper_humi(Temperature, Humidity);
-        app_log_info("Nhom DDCH\r\n");
-        app_log_info("Temp: %d\r\n", DHT11_Data.Temperature);
-        app_log_info("Humd: %d\r\n", DHT11_Data.Humidity);
-    sl_sleeptimer_delay_millisecond(1000); //1s
-    snprintf(buffer_temper, sizeof(buffer_temper), "Nhiet do: %d",Temperature );
-    snprintf(buffer_humi, sizeof(buffer_humi), "Do am: %d", Humidity);
-
-    memlcd_display_temperature(buffer_temper);
-    memlcd_display_humidity(buffer_humi);
 #if defined(SL_CATALOG_POWER_MANAGER_PRESENT)
     // Let the CPU go to sleep if the system allows it.
     sl_power_manager_sleep();
