@@ -1,111 +1,87 @@
-# SoC - Empty
+# Smart Temperature & Humidity Monitoring System with BLE & LCD
 
-The Bluetooth SoC-Empty example is a project that you can use as a template for any standalone Bluetooth application.
+**Group Project | Course: Computer Interface and Data Acquisition | Sep 2024 - Dec 2024**
 
-> Note: this example expects a specific Gecko Bootloader to be present on your device. For details see the Troubleshooting section.
+This project implements an embedded system using a Silicon Labs EFR32 Blue Gecko board to monitor environmental conditions (temperature and humidity), display the data on an LCD, and broadcast it via Bluetooth Low Energy (BLE).
+
+## Features
+
+*   **Sensor Integration:** Interfaces with a DHT11 sensor via GPIO to acquire real-time temperature and humidity readings.
+*   **BLE Communication:** Implements custom BLE advertising packets to broadcast the collected sensor data wirelessly. Remote devices can scan for these packets to receive the environmental information.
+*   **LCD Display:** Utilizes the Silicon Labs Graphics Library (GLIB) and Display Management Driver (DMD) to show current temperature, humidity, and system status (sensor sampling interval, BLE advertising interval) on a connected Sharp Memory LCD.
+*   **UART Configuration:** Enables users to configure the sensor sampling interval and the BLE advertising interval via a UART serial connection.
+*   **Hardware Platform:** Developed for the Silicon Labs EFR32 Blue Gecko series (specifically tested on EFR32BG13).
+*   **Development Environment:** Built using Simplicity Studio IDE and programmed in C.
+
+## Hardware Requirements
+
+*   Silicon Labs EFR32 Blue Gecko Wireless Starter Kit (or a custom board with an EFR32BG13)
+*   DHT11 Temperature and Humidity Sensor
+*   Sharp Memory LCD (compatible with the GLIB/DMD driver, e.g., LS013B7DH03)
+*   Connecting wires
+
+## Software Requirements
+
+*   [Simplicity Studio IDE](https://www.silabs.com/developers/simplicity-studio) v5 or later
+*   [Gecko SDK Suite](https://www.silabs.com/developers/gecko-software-development-kit)
 
 ## Getting Started
 
-To learn the Bluetooth technology basics, see [UG103.14: Bluetooth LE Fundamentals](https://www.silabs.com/documents/public/user-guides/ug103-14-fundamentals-ble.pdf).
+1.  **Clone the Repository:**
+    ```bash
+    # If using Git
+    git clone <repository-url>
+    ```
+2.  **Import Project:** Open Simplicity Studio and import the project (`.slcp` file).
+3.  **Build Project:** Build the project within Simplicity Studio. Ensure the correct board/part is selected.
+4.  **Flash Bootloader (if needed):** As this is an SoC project, it likely requires a bootloader for OTA DFU capabilities or proper execution.
+    *   Flash a suitable bootloader (e.g., *Bluetooth Apploader OTA DFU*) for your EFR32 device first. You can create one using Simplicity Studio or flash a pre-compiled demo that includes a bootloader (like *Bluetooth - SoC Thermometer*).
+    *   **Important:** When flashing the application *after* the bootloader, use the `.hex` or `.s37` file, not `.bin`, to avoid overwriting the bootloader. Refer to [UG103.6: Bootloader Fundamentals](https://www.silabs.com/documents/public/user-guides/ug103-06-fundamentals-bootloading.pdf) and [UG489: Silicon Labs Gecko Bootloader User's Guide](https://cn.silabs.com/documents/public/user-guides/ug489-gecko-bootloader-user-guide-gsdk-4.pdf) for more details.
+5.  **Flash Application:** Flash the built application (`.hex` or `.s37` file) to the EFR32 board using Simplicity Studio's debugger/programmer.
+6.  **Connect Hardware:** Connect the DHT11 sensor and the Sharp Memory LCD to the appropriate GPIO pins as defined in `config/pin_config.h` and the respective driver files (`DHT.c`, `dmd_memlcd.c`, etc.). Connect a USB cable for power and UART communication.
+7.  **Run:** Reset the board. The system should start, read sensor data, display it on the LCD, and begin BLE advertising.
 
-To get started with Silicon Labs Bluetooth and Simplicity Studio, see [QSG169: Bluetooth SDK v3.x Quick Start Guide](https://www.silabs.com/documents/public/quick-start-guides/qsg169-bluetooth-sdk-v3x-quick-start-guide.pdf).
+## Usage
 
-The term SoC stands for "System on Chip", meaning that this is a standalone application that runs on the EFR32/BGM and does not require any external MCU or other active components to operate.
+*   **BLE Advertising:** Use a BLE scanner app (like EFR Connect) on a smartphone or another BLE-capable device to scan for the device. The advertised data will contain the temperature and humidity readings.
+*   **LCD Display:** The Sharp Memory LCD will show:
+    *   Group Name ("Nhom DDCH")
+    *   Current Temperature (e.g., "Nhiet do: 25 C")
+    *   Current Humidity (e.g., "Do am: 60 %")
+    *   Sensor Sampling Interval (e.g., "Chu Ki Sensor: 1 s")
+*   **UART Configuration:**
+    1.  Connect to the board's virtual COM port using a terminal emulator (e.g., Tera Term, PuTTY) with settings 115200 baud, 8N1.
+    2.  Press 'i' to initiate configuration.
+    3.  Follow the prompts:
+        *   Enter '1' to set the DHT11 sampling interval (in seconds, 01-99).
+        *   Enter '2' to set the BLE advertising interval (in seconds, 01-99).
+    4.  Enter the desired two-digit interval value. The system will update its timing accordingly.
 
-As the name implies, the example is an (almost) empty template that has only the bare minimum to make a working Bluetooth application. This skeleton can be extended with the application logic.
+## Code Structure Overview
 
-The development of a Bluetooth applications consist of three main steps:
-
-* Designing the GATT database
-* Responding to the events raised by the Bluetooth stack
-* Implementing additional application logic
-
-These steps are covered in the following sections. To learn more about programming an SoC application, see [UG434: Silicon Labs Bluetooth ® C Application Developer's Guide for SDK v3.x](https://www.silabs.com/documents/public/user-guides/ug434-bluetooth-c-soc-dev-guide-sdk-v3x.pdf).
-
-## Designing the GATT Database
-
-The SOC-empty example implements a basic GATT database. GATT definitions (services/characteristics) can be extended using the GATT Configurator, which can be found under Advanced Configurators in the Software Components tab of the Project Configurator. To open the Project Configurator, open the .slcp file of the project.
-
-![Opening GATT Configurator](image/readme_img1.png)
-
-To learn how to use the GATT Configurator, see [UG438: GATT Configurator User’s Guide for Bluetooth SDK v3.x](https://www.silabs.com/documents/public/user-guides/ug438-gatt-configurator-users-guide-sdk-v3x.pdf).
-
-## Responding to Bluetooth Events
-
-A Bluetooth application is event driven. The Bluetooth stack generates events e.g., when a remote device connects or disconnects or when it writes a characteristic in the local GATT database. The application has to handle these events in the `sl_bt_on_event()` function. The prototype of this function is implemented in *app.c*. To handle more events, the switch-case statement of this function is to be extended. For the list of Bluetooth events, see the online [Bluetooth API Reference](https://docs.silabs.com/bluetooth/latest/).
-
-## Implementing Application Logic
-
-Additional application logic has to be implemented in the `app_init()` and `app_process_action()` functions. Find the definitions of these functions in *app.c*. The `app_init()` function is called once when the device is booted, and `app_process_action()` is called repeatedly in a while(1) loop. For example, you can poll peripherals in this function. To save energy and to have this function called at specific intervals only, for example once every second, use the services of the [Sleeptimer](https://docs.silabs.com/gecko-platform/latest/service/api/group-sleeptimer). If you need a more sophisticated application, consider using RTOS (see [AN1260: Integrating v3.x Silicon Labs Bluetooth Applications with Real-Time Operating Systems](https://www.silabs.com/documents/public/application-notes/an1260-integrating-v3x-bluetooth-applications-with-rtos.pdf)).
-
-## Features Already Added to the SOC-Empty Application
-
-The SOC-Empty application is ***almost*** empty. It implements a basic application to demonstrate how to handle events, how to use the GATT database, and how to add software components.
-
-* A simple application is implemented in the event handler function that starts advertising on boot (and on connection_closed event). This makes it possible for remote devices to find the device and connect to it.
-* A simple GATT database is defined by adding Generic Access and Device Information services. This makes it possible for remote devices to read out some basic information such as the device name.
-* The OTA DFU software component is added, which extends both the event handlers (see *sl_ota_dfu.c*) and the GATT database (see *ota_dfu.xml*). This makes it possible to make Over-The-Air Device-Firmware-Upgrade without any additional application code.
-
-## Testing the SOC-Empty Application
-
-As described above, an empty example does nothing except advertising and letting other devices connect and read its basic GATT database. To test this feature, do the following:
-
-1. Build and flash the SoC-Empty example to your device.
-2. Make sure a bootloader is installed. See the Troubleshooting section.
-3. Download the **EFR Connect** smartphone app, available on [iOS](https://apps.apple.com/us/app/efr-connect/id1030932759) and [Android](https://play.google.com/store/apps/details?id=com.siliconlabs.bledemo).
-4. Open the app and choose the Bluetooth Browser.
-   ![EFR Connect start screen](image/readme_img2.png)
-5. Now you should find your device advertising as "Empty Example". Tap **Connect**.
-   ![Bluetooth Browser](image/readme_img3.png)
-6. The connection is opened, and the GATT database is automatically discovered. Find the device name characteristic under Generic Access service and try to read out the device name.
-   ![GATT database of the device](image/readme_img4.png)
+*   `main.c`: Entry point, system initialization, main loop handling UART input.
+*   `app.c`/`app.h`: Core application logic, Bluetooth event handling (`sl_bt_on_event`), timer callbacks, LCD updates.
+*   `DHT.c`/`DHT.h`: Driver for interfacing with the DHT11 sensor.
+*   `custom_adv.c`/`custom_adv.h`: Functions for creating and updating custom BLE advertisement packets.
+*   `app_lcd.c`/`app_lcd.h`: Application-specific LCD functions using GLIB.
+*   `glib/`: Silicon Labs Graphics Library files (drawing primitives, fonts).
+*   `dmd*.c`/`dmd.h`: Display Management Driver for the memory LCD.
+*   `lcd*.c`/`lcd*.h`: Low-level LCD interface drivers.
+*   `config/`: Project configuration files, including pin mappings (`pin_config.h`).
+*   `autogen/`: Files automatically generated by Simplicity Studio.
 
 ## Troubleshooting
 
-### Bootloader Issues
-
-Note that Example Projects do not include a bootloader. However, Bluetooth-based Example Projects expect a bootloader to be present on the device in order to support device firmware upgrade (DFU). To get your application to work, you should either 
-- flash the proper bootloader or
-- remove the DFU functionality from the project.
-
-**If you do not wish to add a bootloader**, then remove the DFU functionality by uninstalling the *Bootloader Application Interface* software component -- and all of its dependants. This will automatically put your application code to the start address of the flash, which means that a bootloader is no longer needed, but also that you will not be able to upgrade your firmware.
-
-**If you want to add a bootloader**, then either 
-- Create a bootloader project, build it and flash it to your device. Note that different projects expect different bootloaders:
-  - for NCP and RCP projects create a *BGAPI UART DFU* type bootloader
-  - for SoC projects on Series 2 devices create a *Bluetooth Apploader OTA DFU* type bootloader
-
-- or run a precompiled Demo on your device from the Launcher view before flashing your application. Precompiled demos flash both bootloader and application images to the device. Flashing your own application image after the demo will overwrite the demo application but leave the bootloader in place. 
-  - For NCP and RCP projects, flash the *Bluetooth - NCP* demo.
-  - For SoC projects, flash the *Bluetooth - SoC Thermometer* demo.
-
-**Important Notes:** 
-- when you flash your application image to the device, use the *.hex* or *.s37* output file. Flashing *.bin* files may overwrite (erase) the bootloader.
-
-- On Series 2 devices SoC example projects require a *Bluetooth Apploader OTA DFU* type bootloader by default. This bootloader needs a lot of flash space and does not fit into the regular bootloader area, hence the application start address must be shifted. This shift is automatically done by the *Apploader Support for Applications* software component, which is installed by default. If you want to use any other bootloader type, you should remove this software component in order to shift the application start address back to the end of the regular bootloader area. Note, that in this case you cannot do OTA DFU with Apploader, but you can still implement application-level OTA DFU by installing the *Application OTA DFU* software component instead of *In-place OTA DFU*.
-
-For more information on bootloaders, see [UG103.6: Bootloader Fundamentals](https://www.silabs.com/documents/public/user-guides/ug103-06-fundamentals-bootloading.pdf) and [UG489: Silicon Labs Gecko Bootloader User's Guide for GSDK 4.0 and Higher](https://cn.silabs.com/documents/public/user-guides/ug489-gecko-bootloader-user-guide-gsdk-4.pdf).
-
-
-### Programming the Radio Board
-
-Before programming the radio board mounted on the mainboard, make sure the power supply switch is in the AEM position (right side) as shown below.
-
-![Radio board power supply switch](image/readme_img0.png)
-
+*   **No Display/Incorrect Data:** Check wiring for the LCD and DHT11 sensor. Verify pin configurations in `config/pin_config.h` match the hardware connections.
+*   **Not Advertising/Connecting:** Ensure a bootloader is flashed correctly. Verify BLE settings and intervals. Use EFR Connect or another BLE tool to debug advertising packets.
+*   **Build Errors:** Ensure the correct Gecko SDK version is installed and selected in Simplicity Studio. Check for missing components.
 
 ## Resources
 
-[Bluetooth Documentation](https://docs.silabs.com/bluetooth/latest/)
-
-[UG103.14: Bluetooth LE Fundamentals](https://www.silabs.com/documents/public/user-guides/ug103-14-fundamentals-ble.pdf)
-
-[QSG169: Bluetooth SDK v3.x Quick Start Guide](https://www.silabs.com/documents/public/quick-start-guides/qsg169-bluetooth-sdk-v3x-quick-start-guide.pdf)
-
-[UG434: Silicon Labs Bluetooth ® C Application Developer's Guide for SDK v3.x](https://www.silabs.com/documents/public/user-guides/ug434-bluetooth-c-soc-dev-guide-sdk-v3x.pdf)
-
-[Bluetooth Training](https://www.silabs.com/support/training/bluetooth)
+*   [Silicon Labs Bluetooth Documentation](https://docs.silabs.com/bluetooth/latest/)
+*   [UG434: Silicon Labs Bluetooth ® C Application Developer's Guide for SDK v3.x](https://www.silabs.com/documents/public/user-guides/ug434-bluetooth-c-soc-dev-guide-sdk-v3x.pdf)
+*   [GLIB Documentation (Example for EFR32BG13)](https://siliconlabs.github.io/Gecko_SDK_Doc/efr32bg13/html/dir_4e5d6edff79a205450b6fcf6e037f6d7.html)
 
 ## Report Bugs & Get Support
 
-You are always encouraged and welcome to report any issues you found to us via [Silicon Labs Community](https://www.silabs.com/community).
+Note: Use UART or Log, don't use both at the same time
